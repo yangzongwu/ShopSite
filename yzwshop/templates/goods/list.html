@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+'categories':categories,
+                                       'cart_goods_list': cart_goods_list,
+                                       'cart_goods_count': cart_goods_count,
+                                       'goods_data':goods_data,})
+
+
+<div>
+    {% for cag in categories %}
+        <p>
+            <a href="{% url 'goods:goods_list'%}?cag={{cag.id}}">{{cag.cag_name}}</a>
+            {{cag.cag_css}}
+            {{cag.cag_img}}
+        </p>
+    {% endfor %}
+</div>
+<div>
+    total:{{cart_goods_count}}
+    {% for cart_good in cart_goods_list %}
+    <li>{{cart_good.goods_name}}:{{cart_good.goods_num}}</li>
+    {% endfor %}
+</div>
+<div>
+    {% for goods in page_data %}
+    <li>
+        <a href="{% url 'goods:goods_detail'%}?id={{goods.id}}">{{goods.goods_name}}</a>
+        {{goods.goods_price}}
+        {{goods.goods_desc}}
+        <br>
+        <img src="/static/images/{{goods.goods_img}}.jpg" alt="not exist">
+    </li>
+    {% endfor %}
+</div>
+<div>
+    {% if page_data.has_previous %}
+        <a href="?cag=2&amp;page={{ page_data.previous_page_number}}">上一页</a>
+    {% endif %}
+    {% for index in paginator.page_range %}
+        <a href="?cag={{cag_id}}&amp;page={{index}}">{{index}}</a>
+    {% endfor %}
+    {% if page_data.has_next %}
+        <a href="?cag=2&amp;page={{ page_data.next_page_number}}">下一页</a>
+    {% endif %}
+</div>
+</body>
+</html>

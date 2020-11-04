@@ -1,0 +1,45 @@
+-i https://pypi.tuna.tsinghua.edu.cn/simple
+
+插入操作：
+python manage.py shell
+from goods.models import *
+categries=[('水果','fruit',1),('蔬菜','vegetable',2),('日用','necessity',3)]
+for cag in categries:
+	c=GoodsCategory()
+	c.cag_name=cag[0]
+	c.cag_css=cag[1]
+	c.cag_img='images/banner0%d.jpg'%cag[2]
+	c.save()
+
+插入操作：
+from goods.models import *
+goods=GoodsInfo()
+goods.goods_name="Phone3"
+goods.goods_price=78
+goods.goods_img='banner02'
+goods.goods_desc="this is Phone3"
+goods.goods_cag_id=2
+goods.save()
+
+查询操作：
+python manage.py shell
+from goods.models import *
+查询某一条
+goods=GoodsInfo.objects.get(goods_name='apple2')
+print(goods.goods_name,goods.goods_desc)
+查询所有
+all_cags=GoodsCategory.objects.all()
+print(all_cags)
+条件查询
+cag=GoodsCategory.objects.get(id=1)
+goods=GoodsInfo.objects.filter(goods_cag=cag)
+goods.count()
+
+更新
+goods=GoodsInfo.objects.get(goods_name='apple2')
+goods.goods_price=100
+goods.save()
+
+删除
+goods=GoodsInfo.objects.get(goods_name='apple2')
+goods.delete()

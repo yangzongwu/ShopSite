@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'cart:place_order' %}">submit</a>
+cart_goods_list':cart_goods_list,
+<p>total count {{cart_goods_count}}</p>
+<p>total price {{cart_goods_money }}</p>
+<p>details</p>
+{% for good in cart_goods_list %}
+<p>name: {{good.goods_name}}, price: {{good.goods_price}} ,Qty : {{good.num}}</p>
+<p>{{good.goods_desc}}</p>
+<p><img src="/static/images/{{good.goods_img}}.jpg" alt="not exist"></p>
+<a href="{% url 'cart:remove_cart'%}?id={{good.id}}">delete</a>
+{%endfor%}
+</body>
+</html>

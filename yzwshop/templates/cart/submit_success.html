@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>total money: {{total_money}}</p>
+<p>total count: {{total_num}}</p>
+
+<div>
+    <p>{{order_info.order_id}}</p>
+    <p>{{order_info.order_addr}}</p>
+    <p>{{order_info.order_recv}}</p>
+    <p>{{order_info.order_tele}}</p>
+    <p>{{order_info.order_extra}}</p>
+</div>
+
+<div>
+    {% for order_good in order_goods_list%}
+    <p>{{order_good.goods_info.goods_img}}</p>
+    <p>{{order_good.goods_info.goods_name}}</p>
+    <p>{{order_good.goods_info.goods_price}}</p>
+    <p>{{order_good.goods_num}}</p>
+    <p>{{order_good.total_money}}</p>
+    {%endfor %}
+</div>
+
+</body>
+</html>

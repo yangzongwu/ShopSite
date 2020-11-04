@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    total:{{cart_goods_count}}
+    {% for cart_good in cart_goods_list %}
+    <li>{{cart_good.goods_name}}:{{cart_good.goods_num}}</li>
+    {% endfor %}
+</div>
+
+
+ <a href="{% url 'goods:goods_detail'%}?id={{goods_data.id}}">{{goods_data.goods_name}}</a>
+                {{goods_data.goods_price}}
+                {{goods_data.goods_desc}}
+                <br>
+                <img src="/static/images/{{goods_data.goods_img}}.jpg" alt="not exist">
+                <a href="{% url 'cart:add_cart'%}?id={{goods_data.id}}">添加购物车</a>
+</body>
+</html>

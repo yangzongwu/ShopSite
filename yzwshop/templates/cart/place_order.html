@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<br>
+{% for good in cart_goods_list %}
+<p>name: {{good.goods_name}}, price: {{good.goods_price}} ,Qty : {{good.num}}
+{{good.goods_desc}} <img src="/static/images/{{good.goods_img}}.jpg" alt="not exist">
+    <a href="{% url 'cart:remove_cart'%}?id={{good.id}}">delete</a>
+</p>
+
+{%endfor%}
+
+<h3>receive address</h3>
+<form action="/cart/submit_order/" method="post">
+    {% csrf_token %}
+    <div>
+        <table>
+            <tr>
+                <td>收货地址</td>
+                <td><input type="text" name="addr"></td>
+            </tr>
+            <tr>
+                <td>收货人</td>
+                <td><input type="text" name="recv"></td>
+            </tr>
+            <tr>
+                <td>收货电话</td>
+                <td><input type="text" name="phone"></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td><textarea name="extra"></textarea></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <p>total count {{cart_goods_count}}</p>
+        <p>total price {{cart_goods_money }}</p>
+        <input type="submit" value="提交">
+    </div>
+</form>
+</body>
+</html>
