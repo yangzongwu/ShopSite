@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+    ListPage
+{% endblock title %}
 
-'categories':categories,
-                                       'cart_goods_list': cart_goods_list,
-                                       'cart_goods_count': cart_goods_count,
-                                       'goods_data':goods_data,})
-
-
+{% block content %}
 <div>
-    {% for cag in categories %}
-        <p>
-            <a href="{% url 'goods:goods_list'%}?cag={{cag.id}}">{{cag.cag_name}}</a>
-            {{cag.cag_css}}
-            {{cag.cag_img}}
-        </p>
-    {% endfor %}
+
 </div>
 <div>
     total:{{cart_goods_count}}
@@ -49,5 +35,4 @@
         <a href="?cag=2&amp;page={{ page_data.next_page_number}}">下一页</a>
     {% endif %}
 </div>
-</body>
-</html>
+{% endblock content %}

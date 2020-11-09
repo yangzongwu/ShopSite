@@ -1,7 +1,7 @@
 import time
 
 from django.shortcuts import render, redirect
-from goods.models import GoodsInfo
+from goods.models import GoodsInfo,GoodsCategory
 from .models import OrderInfo, OrderGoods
 
 

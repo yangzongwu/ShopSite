@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+    ListPage
+{% endblock title %}
+
+{% block content %}
 <a href="{% url 'cart:place_order' %}">submit</a>
 cart_goods_list':cart_goods_list,
 <p>total count {{cart_goods_count}}</p>
@@ -16,5 +15,4 @@ cart_goods_list':cart_goods_list,
 <p><img src="/static/images/{{good.goods_img}}.jpg" alt="not exist"></p>
 <a href="{% url 'cart:remove_cart'%}?id={{good.id}}">delete</a>
 {%endfor%}
-</body>
-</html>
+{% endblock content %}

@@ -1,0 +1,5 @@
+{% for cag in categories %}
+        <p>
+            <a class="dropdown-item" href="{% url 'goods:goods_list'%}?cag={{cag.id}}">{{cag.cag_css}}</a>
+        </p>
+{% endfor %}

@@ -80,7 +80,7 @@ def goods_list(request):
     current_cag=GoodsCategory.objects.get(id=cag_id)
     goods_data=GoodsInfo.objects.filter(goods_cag=current_cag)
     # goods_data=GoodsInfo.objects.filter(goods_cag_id=cag_id)
-    paginator=Paginator(goods_data,2)
+    paginator=Paginator(goods_data,10)
     page_data=paginator.page(page_id)
 
 

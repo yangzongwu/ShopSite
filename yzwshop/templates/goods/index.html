@@ -1,34 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+    HomePage
+{% endblock title %}
+
+{% block content %}
 <div>
-    <a href="{% url 'cart:show_cart'%}"> 购物车</a>
     {% for cag in categories %}
-        <p>
-            <a href="{% url 'goods:goods_list'%}?cag={{cag.id}}&page=1">{{cag.cag_name}}</a>
-            {{cag.cag_css}}
-            {{cag.cag_img}}
-            {% for goods in cag.goods_list %}
-                <li>
-                <a href="{% url 'goods:goods_detail'%}?id={{goods.id}}">{{goods.goods_name}}</a>
-                {{goods.goods_price}}
-                {{goods.goods_desc}}
-                <br>
-                <img src="/static/images/{{goods.goods_img}}.jpg" alt="not exist">
-                </li>
-            {% endfor %}
-        </p>
+    <div class="row">
+        <div class="col-sm-2">
+            <h3><b><a href="{% url 'goods:goods_list'%}?cag={{cag.id}}&page=1">{{cag.cag_name}}</a></b></h3>
+            <h3><b><i>{{cag.cag_css}}</i></b></h3>
+            <img style="width: 14rem" src="/static/images/{{cag.cag_img}}.jpg" alt="not exist"><br>
+            <a href="{% url 'goods:goods_list'%}?cag={{cag.id}}&page=1">see more</a>
+        </div>
+        <div class="col-sm-10">
+            <div class="row">
+                {% for goods in cag.goods_list %}
+                <div class="">
+                    <div class="card" style="width: 16em;">
+                        <img class="card-img-top" src="/static/images/{{goods.goods_img}}.jpg" alt="not exist">
+                        <div class="card-body">
+                            <h5><b><a href="{% url 'goods:goods_detail'%}?id={{goods.id}}">{{goods.goods_name}}</a></b></h5>
+                            <b class="text-danger">￥: <span >{{goods.goods_price}}</span></b><br>
+                            <i>{{goods.goods_desc}}</i><br>
+                            <a href="{% url 'goods:goods_detail'%}?id={{goods.id}}" class="card-link">details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <br><br><br>
     {% endfor %}
 </div>
 <div>
-    total:{{cart_goods_count}}
-    {% for cart_good in cart_goods_list %}
-    <li>{{cart_good.goods_name}}:{{cart_good.goods_num}}</li>
-    {% endfor %}
-</div>
-</body>
-</html>
+        total:{{cart_goods_count}}
+        {% for cart_good in cart_goods_list %}
+        <li>{{cart_good.goods_name}}:{{cart_good.goods_num}}</li>
+        {% endfor %}
+    </div>
+{% endblock content %}

@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+    ListPage
+{% endblock title %}
+
+{% block content %}
 <p>total money: {{total_money}}</p>
 <p>total count: {{total_num}}</p>
 
@@ -26,5 +25,4 @@
     {%endfor %}
 </div>
 
-</body>
-</html>
+{% endblock content %}
