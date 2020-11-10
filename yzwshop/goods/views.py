@@ -78,7 +78,7 @@ def goods_list(request):
     cag_id=request.GET.get('cag',1)
     page_id=request.GET.get('page',1)
     current_cag=GoodsCategory.objects.get(id=cag_id)
-    goods_data=GoodsInfo.objects.filter(goods_cag=current_cag)
+    goods_data=GoodsInfo.objects.filter(goods_cag=current_cag).order_by("goods_name")
     # goods_data=GoodsInfo.objects.filter(goods_cag_id=cag_id)
     paginator=Paginator(goods_data,10)
     page_data=paginator.page(page_id)

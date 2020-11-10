@@ -7,23 +7,29 @@
 <div>
 
 </div>
+
+<div class="row">
+    {% for goods in page_data %}
+    <div class="">
+        <div class="card" style="width: 16em;">
+            <img class="card-img-top" src="/static/images/{{goods.goods_img}}.jpg" alt="not exist">
+            <div class="card-body">
+                <h5><b><a href="{% url 'goods:goods_detail'%}?id={{goods.id}}">{{goods.goods_name}}</a></b></h5>
+                <b class="text-danger">￥: <span >{{goods.goods_price}}</span></b><br>
+                <i>{{goods.goods_desc}}</i><br>
+                <a href="{% url 'goods:goods_detail'%}?id={{goods.id}}" class="card-link">details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 <div>
     total:{{cart_goods_count}}
     {% for cart_good in cart_goods_list %}
     <li>{{cart_good.goods_name}}:{{cart_good.goods_num}}</li>
     {% endfor %}
 </div>
-<div>
-    {% for goods in page_data %}
-    <li>
-        <a href="{% url 'goods:goods_detail'%}?id={{goods.id}}">{{goods.goods_name}}</a>
-        {{goods.goods_price}}
-        {{goods.goods_desc}}
-        <br>
-        <img src="/static/images/{{goods.goods_img}}.jpg" alt="not exist">
-    </li>
-    {% endfor %}
-</div>
+
 <div>
     {% if page_data.has_previous %}
         <a href="?cag=2&amp;page={{ page_data.previous_page_number}}">上一页</a>
