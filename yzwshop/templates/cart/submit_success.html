@@ -4,25 +4,46 @@
 {% endblock title %}
 
 {% block content %}
-<p>total money: {{total_money}}</p>
-<p>total count: {{total_num}}</p>
-
-<div>
-    <p>{{order_info.order_id}}</p>
-    <p>{{order_info.order_addr}}</p>
-    <p>{{order_info.order_recv}}</p>
-    <p>{{order_info.order_tele}}</p>
-    <p>{{order_info.order_extra}}</p>
+<h3 align="center">PO Details</h3>
+<br>
+<div class="row">
+    <div class="col-3">
+        <p>PN: {{order_info.order_id}}</p>
+        <p>Total Price: {{total_money}}</p>
+        <p>Total Qty: {{total_num}}</p>
+        <p><b>Address:</b></p><p>{{order_info.order_addr}}</p>
+        <p><b>Recerver:</b></p><p>{{order_info.order_recv}}</p>
+        <p><b>Contact Number:</b></p><p>{{order_info.order_tele}}</p>
+        <p><b>Remark:</b></p><p>{{order_info.order_extra}}</p>
+    </div>
+    <div class="col-9">
+        <table class="table">
+        <thead>
+            <tr>
+                <td scope="col">Img</td>
+                <td scope="col">Name</td>
+                <td scope="col">Price</td>
+                <td scope="col">Qty</td>
+                <td scope="col">Total Price</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order_good in order_goods_list%}
+            <tr>
+                <td><a href="{% url 'goods:goods_detail'%}?id={{good.id}}">
+                    <img src="/static/images/{{order_good.goods_info.goods_img}}.jpg" alt="not exist"></a></td>
+                <td><a href="{% url 'goods:goods_detail'%}?id={{good.id}}">{{order_good.goods_info.goods_name}}</a></td>
+                <td>￥{{order_good.goods_info.goods_price}}</td>
+                <td>{{order_good.goods_num}}</td>
+                <td>￥{{order_good.goods_total_money}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+        </table>
+        <div align="right">
+            <h5>Total Count: {{total_num}}</h5>
+            <h5>Total Price:  ￥{{total_money}}</h5>
+        </div>
+    </div>
 </div>
-
-<div>
-    {% for order_good in order_goods_list%}
-    <p>{{order_good.goods_info.goods_img}}</p>
-    <p>{{order_good.goods_info.goods_name}}</p>
-    <p>{{order_good.goods_info.goods_price}}</p>
-    <p>{{order_good.goods_num}}</p>
-    <p>{{order_good.total_money}}</p>
-    {%endfor %}
-</div>
-
 {% endblock content %}

@@ -5,42 +5,53 @@
 
 {% block content %}
 
+<h2 align="center">Cart Info</h2><br>
+<table class="table">
+    <thead>
+        <tr>
+            <td scope="col">Name</td>
+            <td scope="col">Img</td>
+            <td scope="col">Desc</td>
+            <td scope="col">Qty</td>
+            <td scope="col">Price</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for good in cart_goods_list %}
+        <tr>
+            <td><a href="{% url 'goods:goods_detail'%}?id={{good.id}}">{{good.goods_name}}</a></td>
+            <td><a href="{% url 'goods:goods_detail'%}?id={{good.id}}">
+                <img src="/static/images/{{good.goods_img}}.jpg" alt="not exist"></a></td>
+            <td>{{good.goods_desc}}</td>
+            <td>{{good.num}}</td>
+            <td>￥{{good.goods_price}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+<div align="right">
+    <h5>Total Count: {{cart_goods_count}}</h5>
+    <h5>Total Price:  ￥{{cart_goods_money }}</h5>
+</div>
 <br>
-{% for good in cart_goods_list %}
-<p>name: {{good.goods_name}}, price: {{good.goods_price}} ,Qty : {{good.num}}
-{{good.goods_desc}} <img src="/static/images/{{good.goods_img}}.jpg" alt="not exist">
-    <a href="{% url 'cart:remove_cart'%}?id={{good.id}}">delete</a>
-</p>
-
-{%endfor%}
-
-<h3>receive address</h3>
+<h2 align="center">Receive Address</h2>
 <form action="/cart/submit_order/" method="post">
     {% csrf_token %}
-    <div>
-        <table>
-            <tr>
-                <td>收货地址</td>
-                <td><input type="text" name="addr"></td>
-            </tr>
-            <tr>
-                <td>收货人</td>
-                <td><input type="text" name="recv"></td>
-            </tr>
-            <tr>
-                <td>收货电话</td>
-                <td><input type="text" name="phone"></td>
-            </tr>
-            <tr>
-                <td>备注</td>
-                <td><textarea name="extra"></textarea></td>
-            </tr>
-        </table>
+    <div class="form-group">
+        <label for="addr">Receive address</label>
+        <input type="text" class="form-control" id="addr" name="addr">
+        <label for="recv">Receive Person</label>
+        <input type="text" class="form-control" id="recv" name="recv">
+        <label for="phone">Contact Number</label>
+        <input type="text" class="form-control" id="phone" name="phone">
+        <label for="extra">Remark</label>
+        <input type="textarea" class="form-control" id="extra" name="extra">
     </div>
-    <div>
-        <p>total count {{cart_goods_count}}</p>
-        <p>total price {{cart_goods_money }}</p>
-        <input type="submit" value="提交">
+    <div align="right">
+        <h5>Total Count: {{cart_goods_count}}</h5>
+        <h5>Total Price:  ￥{{cart_goods_money }}</h5>
+        <input type="submit" value="Submit">
     </div>
 </form>
+
 {% endblock content %}

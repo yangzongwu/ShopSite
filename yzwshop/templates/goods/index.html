@@ -17,7 +17,7 @@
             <div class="row">
                 {% for goods in cag.goods_list %}
                 <div class="">
-                    <div class="card" style="width: 16em;">
+                    <div class="card" style="width: 15em;">
                         <img class="card-img-top" src="/static/images/{{goods.goods_img}}.jpg" alt="not exist">
                         <div class="card-body">
                             <h5><b><a href="{% url 'goods:goods_detail'%}?id={{goods.id}}">{{goods.goods_name}}</a></b></h5>
@@ -34,10 +34,4 @@
     <br><br><br>
     {% endfor %}
 </div>
-<div>
-        total:{{cart_goods_count}}
-        {% for cart_good in cart_goods_list %}
-        <li>{{cart_good.goods_name}}:{{cart_good.goods_num}}</li>
-        {% endfor %}
-    </div>
 {% endblock content %}

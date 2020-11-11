@@ -23,14 +23,9 @@
     </div>
     {% endfor %}
 </div>
-<div>
-    total:{{cart_goods_count}}
-    {% for cart_good in cart_goods_list %}
-    <li>{{cart_good.goods_name}}:{{cart_good.goods_num}}</li>
-    {% endfor %}
-</div>
 
 <div>
+    <p><b>Page:</b>
     {% if page_data.has_previous %}
         <a href="?cag=2&amp;page={{ page_data.previous_page_number}}">上一页</a>
     {% endif %}
@@ -39,6 +34,6 @@
     {% endfor %}
     {% if page_data.has_next %}
         <a href="?cag=2&amp;page={{ page_data.next_page_number}}">下一页</a>
-    {% endif %}
+    {% endif %}</p>
 </div>
 {% endblock content %}

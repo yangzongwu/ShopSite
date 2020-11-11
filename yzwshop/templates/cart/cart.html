@@ -4,15 +4,36 @@
 {% endblock title %}
 
 {% block content %}
-<a href="{% url 'cart:place_order' %}">submit</a>
-cart_goods_list':cart_goods_list,
-<p>total count {{cart_goods_count}}</p>
-<p>total price {{cart_goods_money }}</p>
-<p>details</p>
-{% for good in cart_goods_list %}
-<p>name: {{good.goods_name}}, price: {{good.goods_price}} ,Qty : {{good.num}}</p>
-<p>{{good.goods_desc}}</p>
-<p><img src="/static/images/{{good.goods_img}}.jpg" alt="not exist"></p>
-<a href="{% url 'cart:remove_cart'%}?id={{good.id}}">delete</a>
-{%endfor%}
+
+<h2 align="center">Cart Info</h2><br>
+<table class="table">
+    <thead>
+        <tr>
+            <td scope="col">Name</td>
+            <td scope="col">Img</td>
+            <td scope="col">Desc</td>
+            <td scope="col">Qty</td>
+            <td scope="col">Price</td>
+            <td scope="col">Delete</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for good in cart_goods_list %}
+        <tr>
+            <td><a href="{% url 'goods:goods_detail'%}?id={{good.id}}">{{good.goods_name}}</a></td>
+            <td><a href="{% url 'goods:goods_detail'%}?id={{good.id}}">
+                <img src="/static/images/{{good.goods_img}}.jpg" alt="not exist"></a></td>
+            <td>{{good.goods_desc}}</td>
+            <td>{{good.num}}</td>
+            <td>￥{{good.goods_price}}</td>
+            <td><a href="{% url 'cart:remove_cart'%}?id={{good.id}}">delete</a></td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+<div align="right">
+    <h5>Total Count: {{cart_goods_count}}</h5>
+    <h5>Total Price:  ￥{{cart_goods_money }}</h5>
+    <h3><a href="{% url 'cart:place_order' %}">Submit</a></h3>
+</div>
 {% endblock content %}

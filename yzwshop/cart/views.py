@@ -118,6 +118,7 @@ def submit_success(request):
     total_num = 0
     for goods in order_goods_list:
         goods_total_money = goods.goods_info.goods_price * goods.goods_num
+        goods.goods_total_money=goods_total_money
         total_money += goods_total_money
         total_num += goods.goods_num
 

@@ -4,28 +4,24 @@
 {% endblock title %}
 
 {% block content %}
-    <div class = "container">
-        <div class="row">
-            <img class="card-img-top" src="/static/images/{{goods_data.goods_img}}.jpg" alt="not exist" style="width: 18em">
-            <div class="card-body">
-                <h5><b><a href="{% url 'goods:goods_detail'%}?id={{goods_data.id}}">name :{{goods_data.goods_name}}</a></b></h5>
-                <b class="text-danger">Price: ￥<span >{{goods_data.goods_price}}</span></b><br>
-
+<div class="row">
+    <div class="col-8">
+        <div class = "container">
+            <div class="row align-items-center">
+                <img class="card-img-top" src="/static/images/{{goods_data.goods_img}}.jpg" alt="not exist" style="width: 18em">
+                <div class="card-body">
+                    <h5><b><a href="{% url 'goods:goods_detail'%}?id={{goods_data.id}}">name :{{goods_data.goods_name}}</a></b></h5>
+                    <b class="text-danger">Price: ￥<span >{{goods_data.goods_price}}</span></b><br>
+                    <a href="{% url 'cart:add_cart'%}?id={{goods_data.id}}">AddCart</a>
+                </div>
+            </div>
+            <div>
+                <a href="{% url 'goods:goods_detail'%}?id={{goods_data.id}}" class="card-link">details</a>
+                <i>{{goods_data.goods_desc}}</i><br>
             </div>
         </div>
-        <div>
-            <a href="{% url 'goods:goods_detail'%}?id={{goods_data.id}}" class="card-link">details</a>
-            <i>{{goods_data.goods_desc}}</i><br>
-        </div>
     </div>
-
-
-
-<div>
-    total:{{cart_goods_count}}
-    {% for cart_good in cart_goods_list %}
-    <li>{{cart_good.goods_name}}:{{cart_good.goods_num}}</li>
-    {% endfor %}
 </div>
+
 
 {% endblock content %}
